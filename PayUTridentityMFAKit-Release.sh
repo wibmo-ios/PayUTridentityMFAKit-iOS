@@ -50,7 +50,7 @@ podTrunkPush() {
 }
 
 podName="PayUTridentityMFAKit"
-podVersion="0.0.1"
+podVersion="0.0.2"
 
 podSpec="${podName}.podspec"
 tag="${podVersion}"

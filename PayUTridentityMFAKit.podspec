@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                = "PayUTridentityMFAKit"
-  s.version             = "0.0.1"
+  s.version             = "0.0.2"
   s.license             = "MIT"
   s.homepage            = "https://github.com/wibmo-ios/PayUTridentityMFAKit-iOS.git"
   s.author              = { "Wibmo" => "ios@wibmo.com"  }
