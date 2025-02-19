@@ -1,0 +1,377 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name PayUTridentityMFAKit
+import Combine
+import CommonCrypto
+import CoreData
+import CoreGraphics
+import CoreLocation
+import CoreTelephony
+import CoreText
+import CryptoKit
+import Darwin
+import DeveloperToolsSupport
+import Foundation
+import LocalAuthentication
+import MachO
+import MessageUI
+import QuartzCore
+import Security
+import Swift
+import SwiftUI
+import SystemConfiguration
+import UIKit
+import UserNotifications
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os.log
+import os
+extension QuartzCore.CALayer {
+  public func logLayerTree(withIndent: Swift.Int = 0)
+}
+public protocol TransactionInfo {
+  var amount: Swift.String? { get }
+  var merchantName: Swift.String? { get }
+  var productId: Swift.String? { get }
+  var timeStamp: Swift.Double { get }
+  var expTimeStamp: Swift.Double { get }
+  var type: Swift.String? { get }
+  var transactionId: Swift.String? { get }
+  var requesterTxnId: Swift.String? { get }
+  var authenticationType: Swift.String? { get }
+}
+public protocol TransactionPayment {
+  associatedtype Info : PayUTridentityMFAKit.TransactionInfo
+  var transaction: Self.Info { get }
+  var paymentStatus: PayUTridentityMFAKit.PushStatus { get }
+}
+@_inheritsConvenienceInitializers @objc public class ClientConfig : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum KeyChainKey : Swift.String, Swift.Codable {
+  case clientId
+  case secretKey
+  case apiKey
+  case clientToken
+  case clientExpiry
+  case clientServerPubkey
+  case clientBin
+  case clientFCMToken
+  case registeredPhoneNumber
+  case environment
+  case appId
+  case customerId
+  case consentId
+  case featureId
+  case deviceUUID
+  case simID
+  case aesKey
+  case payloadSecretKey
+  case offlineOtp
+  case biometricAuthenticationData
+  case biomtricPopupShown
+  case isDateAndTimeAutoSet
+  case shouldAllowSecurityCheck
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc public protocol TridentSDKDelegate {
+  @objc func fetchStatus(data: [Swift.String : Any])
+  @objc func showCustomerStatus(message: Swift.String)
+}
+@objc public protocol HeadlessSDKProtocol {
+  @objc func sdkStatusUpdate(data: [Swift.String : Any])
+}
+@objc public protocol TridentityMFASDKProtocol {
+  @objc func sdkStatusUpdate(data: [Swift.String : Any])
+}
+@available(*, unavailable, renamed: "Notification.Name.reachabilityChanged")
+public let SDKReachabilityChangedNotification: Foundation.NSNotification.Name
+extension Foundation.NSNotification.Name {
+  public static let reachabilityChanged: Foundation.Notification.Name
+}
+@_hasMissingDesignatedInitializers public class MockUtility {
+  public static var isMockEnabled: Swift.Bool
+  public static var jsonFileName: Swift.String
+  @objc deinit
+}
+public func base32Encode(_ data: Foundation.Data) -> Swift.String
+public func base32HexEncode(_ data: Foundation.Data) -> Swift.String
+public func base32DecodeToData(_ string: Swift.String) -> Foundation.Data?
+public func base32HexDecodeToData(_ string: Swift.String) -> Foundation.Data?
+public func base32Encode(_ array: [Swift.UInt8]) -> Swift.String
+public func base32HexEncode(_ array: [Swift.UInt8]) -> Swift.String
+public func base32Decode(_ string: Swift.String) -> [Swift.UInt8]?
+public func base32HexDecode(_ string: Swift.String) -> [Swift.UInt8]?
+extension Swift.String {
+  public var base32DecodedData: Foundation.Data? {
+    get
+  }
+  public var base32EncodedString: Swift.String {
+    get
+  }
+  public func base32DecodedString(_ encoding: Swift.String.Encoding = .utf8) -> Swift.String?
+  public var base32HexDecodedData: Foundation.Data? {
+    get
+  }
+  public var base32HexEncodedString: Swift.String {
+    get
+  }
+  public func base32HexDecodedString(_ encoding: Swift.String.Encoding = .utf8) -> Swift.String?
+}
+extension Foundation.Data {
+  public var base32EncodedString: Swift.String {
+    get
+  }
+  public var base32EncodedData: Foundation.Data {
+    get
+  }
+  public var base32DecodedData: Foundation.Data? {
+    get
+  }
+  public var base32HexEncodedString: Swift.String {
+    get
+  }
+  public var base32HexEncodedData: Foundation.Data {
+    get
+  }
+  public var base32HexDecodedData: Foundation.Data? {
+    get
+  }
+}
+final public class TDYFloatValueProvider {
+  public typealias CGFloatValueBlock = (CoreFoundation.CGFloat) -> CoreFoundation.CGFloat
+  final public var float: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  public init(block: @escaping PayUTridentityMFAKit.TDYFloatValueProvider.CGFloatValueBlock)
+  public init(_ float: CoreFoundation.CGFloat)
+  final public var valueType: any Any.Type {
+    get
+  }
+  final public func hasUpdate(frame: CoreFoundation.CGFloat) -> Swift.Bool
+  final public func value(frame: CoreFoundation.CGFloat) -> Any
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class TridentityMFASDKInterface : ObjectiveC.NSObject {
+  @objc public static let shared: PayUTridentityMFAKit.TridentityMFASDKInterface
+  @objc public func initializeSDK()
+  @objc public func configureSDK(with jsonObject: [Swift.String : Any], completionHandler: @escaping (Swift.Bool, [Swift.String : Any]) -> Swift.Void)
+  @objc public func initiateRegistration(with jsonObject: [Swift.String : Any], in homeViewController: UIKit.UIViewController, completionHandler: @escaping ([Swift.String : Any]) -> Swift.Void)
+  @objc public func checkRegistrationStatus(isBiometricChanged: Swift.Bool = false, with jsonObject: [Swift.String : Swift.String], completionHandler: @escaping ([Swift.String : Any]) -> Swift.Void)
+  @objc public func processTransaction(with jsonObject: [Swift.String : Swift.String], statusDelegate: any PayUTridentityMFAKit.TridentityMFASDKProtocol)
+  @objc public func deRegisterUser(withUID uid: Swift.String, clientId: Swift.String, statusDelegate: any PayUTridentityMFAKit.TridentityMFASDKProtocol)
+  @objc deinit
+}
+public class TDYAsset : Swift.Codable {
+  final public let id: Swift.String
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+extension Foundation.Data {
+  public var bytes: [Swift.UInt8] {
+    get
+  }
+}
+infix operator +| : DefaultPrecedence
+infix operator +- : DefaultPrecedence
+@_hasMissingDesignatedInitializers public class KeyChain {
+  public static let shareKC: PayUTridentityMFAKit.KeyChain
+  public func appKeys() -> [Swift.String]
+  public func userKeys() -> [Swift.String]
+  public func allKeys() -> [Swift.String]
+  public func removeAll() -> Swift.Bool
+  @objc deinit
+}
+public enum WibmoAuthenticatorError : Swift.Error {
+  public var domain: Swift.String {
+    get
+  }
+  case connectionError(reason: PayUTridentityMFAKit.ConnectionFailureReason)
+  case serverResponse(reason: PayUTridentityMFAKit.ServerResponseFailure)
+  case unknownError
+  case sdkTimedout
+  case retryLimitBreached
+  case biometricFailed
+  case tokenExpired
+  case registerFailed(reason: PayUTridentityMFAKit.RegisterFailedReason)
+  case failedByReason(Swift.String)
+  case updateTransactionFailed(reason: Swift.String)
+}
+extension PayUTridentityMFAKit.WibmoAuthenticatorError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public enum RegisterFailedReason {
+  case pvcRetry
+  case bindingFailed
+  case smsSendError(reason: PayUTridentityMFAKit.SmsSendFailureReason)
+  case invalidToken
+  case mobileNumberMismatch
+}
+public enum ConnectionFailureReason {
+  case noInternetAccess
+  case apiTokenExpired
+  case apiFailure
+  public static func == (a: PayUTridentityMFAKit.ConnectionFailureReason, b: PayUTridentityMFAKit.ConnectionFailureReason) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ServerResponseFailure {
+  case serverError(Swift.String?)
+}
+public enum SmsSendFailureReason {
+  case cancelled
+  case failed
+  case notAvailable
+  case invalidToken
+  case eventTimeout
+  public static func == (a: PayUTridentityMFAKit.SmsSendFailureReason, b: PayUTridentityMFAKit.SmsSendFailureReason) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension PayUTridentityMFAKit.RegisterFailedReason : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension PayUTridentityMFAKit.ConnectionFailureReason : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension PayUTridentityMFAKit.ServerResponseFailure : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension PayUTridentityMFAKit.SmsSendFailureReason : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public protocol NotificationState : AnyObject {
+  func doClearNotification(_ trnxID: Swift.String?)
+  func recievedNotification(_ trnxID: Swift.String?)
+}
+public struct PushTransactionConvertor {
+  public static func makeTransactionDetail(fromPushInfo userInfo: [Swift.AnyHashable : Any]) -> PayUTridentityMFAKit.TransactionDetail?
+}
+public enum TDYOTPAlgorithm {
+  case sha1
+  case sha256
+  case sha512
+  public static func == (a: PayUTridentityMFAKit.TDYOTPAlgorithm, b: PayUTridentityMFAKit.TDYOTPAlgorithm) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers public class TransactionDetail : ObjectiveC.NSObject {
+  public var amount: Swift.String
+  public var merchantName: Swift.String
+  public var timeStamp: Swift.Double
+  public var expTimeStamp: Swift.Double
+  public var type: Swift.String?
+  public var transactionId: Swift.String
+  public var authenticationType: Swift.String
+  public var expireTimer: Foundation.Timer?
+  @objc deinit
+}
+public struct TDYHOTP {
+  public let secret: Foundation.Data
+  public let digits: Swift.Int
+  public let algorithm: PayUTridentityMFAKit.TDYOTPAlgorithm
+  public init?(secret: Foundation.Data, digits: Swift.Int = 6, algorithm: PayUTridentityMFAKit.TDYOTPAlgorithm = .sha1)
+  public func generate(counter: Swift.UInt64) -> Swift.String?
+}
+public enum PushStatus : Swift.String, Swift.Codable {
+  case accept
+  case decline
+  case expired
+  case cancelled
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public typealias URLString = Swift.String
+public func print(_ items: Swift.String..., function: Swift.String = #function, separator: Swift.String = " ", terminator: Swift.String = "\n")
+extension Swift.Array where Element == Swift.UInt8 {
+  public func toHexString() -> Swift.String
+}
+public enum RegistrationResponseCode : Swift.Int {
+  case success
+  case invalidClientDetail
+  case invalidConsumerId
+  case consentRequired
+  case customerDeregistered
+  case tokenNotAllowed
+  case checksumMismatch
+  case txnIdInvalidOrProcessed
+  case pendingDeregistration
+  case simBindingInit
+  case simBindingTokenDelivered
+  case simBindingTokenDeliveryFailed
+  case simBindingSuccess
+  case registrationEvalFailed
+  case registrationCommL1Failed
+  case registrationCommL2Failed
+  case tempCardIdMissing
+  case binMissing
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct TDYTOTP {
+  public let secret: Foundation.Data
+  public let digits: Swift.Int
+  public let timeInterval: Swift.Int
+  public let algorithm: PayUTridentityMFAKit.TDYOTPAlgorithm
+  public init?(secret: Foundation.Data, digits: Swift.Int = 6, timeInterval: Swift.Int = 30, algorithm: PayUTridentityMFAKit.TDYOTPAlgorithm = .sha1)
+  public func generate(time: Foundation.Date) -> Swift.String?
+  public func generate(secondsPast1970: Swift.Int) -> Swift.String?
+}
+@objc public class TDYTokenValidateResponse : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let status: Swift.String?
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public protocol AuthenticatorTheme {
+  var primaryColor: UIKit.UIColor { get }
+  var secondaryColor: UIKit.UIColor { get }
+  var backgroundColor: UIKit.UIColor { get }
+  var navigationBar: UIKit.UIColor { get }
+  var bottomBar: UIKit.UIColor { get }
+}
+extension PayUTridentityMFAKit.KeyChainKey : Swift.Equatable {}
+extension PayUTridentityMFAKit.KeyChainKey : Swift.Hashable {}
+extension PayUTridentityMFAKit.KeyChainKey : Swift.RawRepresentable {}
+extension PayUTridentityMFAKit.ConnectionFailureReason : Swift.Equatable {}
+extension PayUTridentityMFAKit.ConnectionFailureReason : Swift.Hashable {}
+extension PayUTridentityMFAKit.SmsSendFailureReason : Swift.Equatable {}
+extension PayUTridentityMFAKit.SmsSendFailureReason : Swift.Hashable {}
+extension PayUTridentityMFAKit.TDYOTPAlgorithm : Swift.Equatable {}
+extension PayUTridentityMFAKit.TDYOTPAlgorithm : Swift.Hashable {}
+extension PayUTridentityMFAKit.PushStatus : Swift.Equatable {}
+extension PayUTridentityMFAKit.PushStatus : Swift.Hashable {}
+extension PayUTridentityMFAKit.PushStatus : Swift.RawRepresentable {}
+extension PayUTridentityMFAKit.RegistrationResponseCode : Swift.Equatable {}
+extension PayUTridentityMFAKit.RegistrationResponseCode : Swift.Hashable {}
+extension PayUTridentityMFAKit.RegistrationResponseCode : Swift.RawRepresentable {}
